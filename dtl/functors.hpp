@@ -66,7 +66,7 @@ namespace dtl {
         CommonPrinter  (stream& out) : Printer < sesElem, stream > (out) {}
         ~CommonPrinter () {}
         void operator() (const sesElem& se) const {
-            this->out_ << SES_MARK_COMMON << se.first << endl;    
+            this->out_ << SES_MARK_COMMON << se.first << endl;
         }
     };
     
@@ -83,13 +83,13 @@ namespace dtl {
         void operator() (const sesElem& se) const {
             switch (se.second.type) {
             case SES_ADD:
-                this->out_ << SES_MARK_ADD    << se.first << endl;
+                this->out_ << SES_MARK_ADD    << se.first << "\033[0m" << endl;
                 break;
             case SES_DELETE:
-                this->out_ << SES_MARK_DELETE << se.first << endl;
+                this->out_ << SES_MARK_DELETE << se.first << "\033[0m" << endl;
                 break;
             case SES_COMMON:
-                this->out_ << SES_MARK_COMMON << se.first << endl;
+                this->out_ << SES_MARK_COMMON << se.first << "\033[0m" << endl;
                 break;
             }
         }
@@ -106,11 +106,11 @@ namespace dtl {
         UniHunkPrinter  (stream& out) : out_(out)  {}
         ~UniHunkPrinter () {}
         void operator() (const uniHunk< sesElem >& hunk) const {
-            out_ << "@@"
+            out_ << "\033[36m@@"
                  << " -"  << hunk.a << "," << hunk.b
                  << " +"  << hunk.c << "," << hunk.d
-                 << " @@" << endl;
-            
+                 << " @@\033[0m" << endl;
+
             for_each(hunk.common[0].begin(), hunk.common[0].end(), CommonPrinter< sesElem, stream >(out_));
             for_each(hunk.change.begin(),    hunk.change.end(),    ChangePrinter< sesElem, stream >(out_));
             for_each(hunk.common[1].begin(), hunk.common[1].end(), CommonPrinter< sesElem, stream >(out_));

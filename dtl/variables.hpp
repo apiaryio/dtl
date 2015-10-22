@@ -76,9 +76,9 @@ namespace dtl {
     /**
      * mark of SES
      */
-#define SES_MARK_DELETE "-"
+#define SES_MARK_DELETE "\033[31m-"
 #define SES_MARK_COMMON " "
-#define SES_MARK_ADD    "+"
+#define SES_MARK_ADD    "\033[32m+"
 
     /**
      * info for Unified Format
