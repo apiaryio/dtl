@@ -26,8 +26,12 @@ write_basic_package_version_file("dtl-config-version.cmake"
     VERSION ${dtl_VERSION}
     COMPATIBILITY SameMajorVersion
     )
-install(FILES "dtl-config.cmake" "dtl-config-version.cmake"
-    DESTINATION lib/cmake/dtl
+install(
+    FILES
+        "dtl-config.cmake"
+        "${CMAKE_CURRENT_BINARY_DIR}/dtl-config-version.cmake"
+    DESTINATION
+        lib/cmake/dtl
     )
 
 add_library(dtl::dtl ALIAS dtl)
